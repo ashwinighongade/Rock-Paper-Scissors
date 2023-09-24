@@ -1,46 +1,36 @@
-# Rock,paper, scissor game
 import random
-option=["rock","paper","scissor"]
-while True:
-    print("Welcome the Rock Paper Scissor Game")
-    user_point=0
-    computer_point=0
-    0=="rock"
-    1=="paper"
-    2=="scissor"
-    i=1
-    while i<=3:
-        print("rount",i,"Start" )
-        print("please select your option ")
-        user_option=int(input("Enter the number of your option between 0 to 2 :"))
-        computer_option=random.randint(0,2)
-        print("computer option :",computer_option)
-        if user_option=="end the game":
-            print("The game has end")
-            break
-        elif user_option==computer_option:
-            print("drop")    
-        elif (user_option==1 and computer_option==0) or (user_option==2 and computer_option==1) or (user_option==0 and computer_option==2):
-            user_point+=1
-            print("You win",user_point) 
-        else:
-            computer_point+=1
-            print("computer win",computer_point)
-        i+=1
-    if user_point>computer_point:
-        print("you win")
-        print("user point =",user_point,":","computer point =",computer_point)
-        break
-    elif computer_point>user_point:
-        print("computer win")
-        print("computer point =",computer_point,":","user point =",user_point)
-        break
+
+def get_user_choice():
+    user_choice = input("Choose Rock, Paper, or Scissors: ").strip().lower()
+    while user_choice not in ["rock", "paper", "scissors"]:
+        print("Invalid choice. Please choose Rock, Paper, or Scissors.")
+        user_choice = input("Choose Rock, Paper, or Scissors: ").strip().lower()
+    return user_choice
+
+def get_computer_choice():
+    return random.choice(["rock", "paper", "scissors"])
+
+def determine_winner(user_choice, computer_choice):
+    if user_choice == computer_choice:
+        return "It's a tie!"
+    elif (user_choice == "rock" and computer_choice == "scissors") or \
+         (user_choice == "paper" and computer_choice == "rock") or \
+         (user_choice == "scissors" and computer_choice == "paper"):
+        return "You win!"
     else:
-        print("same point bothe of you")
-        print("computer point =",computer_point,":","user point =",user_point)
-        user=("can you play again game - Yes or No ")
-        if user=="yes" or user=="YES" or user=="Yes":
-            print("Ok,Let's continue")
-        else:
+        return "Computer wins!"
+
+def main():
+    print("Welcome to Rock, Paper, Scissors!")
+    while True:
+        user_choice = get_user_choice()
+        computer_choice = get_computer_choice()
+        print("Your chose",user_choice)
+        print("Computer chose",computer_choice)
+        result = determine_winner(user_choice, computer_choice)
+        print(result)
+        play_again = input("Play again? (yes/no): ").strip().lower()
+        if play_again != "yes":
             break
-    
+
+main()
